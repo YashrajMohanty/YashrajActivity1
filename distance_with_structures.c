@@ -1,43 +1,39 @@
 //WAP to find the distance between two points using structures and 4 functions.
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 struct point
 {
 float x;
 float y;
-}p;
+};
 
-p input()
+void input(struct point *p)
 {
-p dot;
-printf("Entered x:");
-scanf("%f",dot.x);
-printf("Entered y:");
-scanf("%f,dot.y);
-return dot;
+printf("Enter coordinates:\n");
+scanf("%f%f", &(*p).x, &(*p).y);
 }
 
-float compute(p p1,p p2)
+float distance(struct point p1,struct point p2)
 {
 float dist;
-dist=sqrt(pow((p2.x-p1.y),2)+pow((p2.y-p1.y),2));
+dist = sqrt(pow((p1.x-p2.x),2)+pow((p1.y-p2.y),2));
 return dist;
 }
 
 void output(float dist)
 {
-printf("The distance between the points is %f",dist);
+printf("Distance between the points = %f",dist);
 }
 
 void main()
 {
-p p1,p2;
+struct point p1,p2;
 float d;
-printf("First point:\n");
-p1=input();
-printf("Second point:\n);
-p2=input();
-d=compute(p1,p2);
+printf("1st point:\n");
+input(&p1);
+printf("2nd point:\n");
+input(&p2);
+d=distance(p1,p2);
 output(d);
 }
