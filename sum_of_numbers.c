@@ -1,13 +1,44 @@
-#include<stdio.h>
-#include<conio.h>
+#include <stdio.h>
 
-void main()
+int inputn()
 {
-int n1,n2,sum;
-printf("Enter number 1:\n");
-scanf("%d",&n1);
-printf("Enter number 2:\n");
-scanf("%d",&n2);
-sum=n1+n2;
-printf("Sum of %d and %d is %d",n1,n2,sum);
+    int n;
+    printf("Enter the value of n:");
+    scanf("%d",&n);
+    return n;
+}
+
+void enterelement(int n,int a[n])
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter the element %d of array:",i+1);
+        scanf("%d",&a[i]);
+    }
+}
+
+int add(int n,int a[n])
+{
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        sum=sum+a[i];
+    }
+    return sum;
+}
+
+int output(int sum)
+{
+    int i;
+    printf("The sum is %d",sum);
+}
+
+int main()
+{
+    int n,sum;
+    n=inputn();
+    int a[n];
+    enterelement(n,a);
+    sum=add(n,a);
+    output(sum);
 }
