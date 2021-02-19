@@ -55,18 +55,45 @@ int addden(int n,struct fraction a)
    return sumd;
 }
 
-void output(int sumn,int sumd)
+int gcd(int sumn,int sumd)
 {
-   printf("The sum of the fractions is %d/%d",sumn,sumd);
+    int finalgcd,min,i;
+    if(sumn<=sumd)
+    {
+        min=sumn;
+    }
+    else
+    {
+        min=sumd;
+    }
+    for(i=2;i<=min;i++)
+    {
+        if(sumn%i==0 && sumd%i==0)
+        {
+            finalgcd=i;
+        }
+    }
+    return finalgcd;
 }
 
-void main()
+void output(int sumn,int sumd,int finalgcd)
+{
+   printf("The sum of the fractions is %d/%d",sumn/finalgcd,sumd/finalgcd);
+}
+
+void addfrac()
 {
    struct fraction a;
-   int sumn,sumd,n;
+   int sumn,sumd,n,finalgcd;
    n=inputn();
    input(n,&a);
    sumn=addnum(n,a);
    sumd=addden(n,a);
-   output(sumn,sumd);
+   finalgcd=gcd(sumn,sumd);
+   output(sumn,sumd,finalgcd);
+}
+
+void main()
+{
+    addfrac();
 }
