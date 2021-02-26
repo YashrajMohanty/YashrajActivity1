@@ -1,89 +1,91 @@
 #include<stdio.h>
-
-struct fraction
+typedef struct 
 {
-   int x[100];
-   int y[100];
-};
+    int n;
+    int d;
+}frac;
 
-int input(struct fraction *p)
+ 
+frac input();
+void compute(int);
+frac sum(frac,frac);
+int gcd(int,int);
+void output(frac);
+ 
+void addfrac()
 {
-   for(int i=0;i<2;i++)
-   {
-       printf("Enter numerator for fraction %d:",i+1);
-       scanf("%d",&(*p).x[i]);
-       printf("Enter denominator for fraction %d:",i+1);
-       scanf("%d",&(*p).y[i]);
-   }
+    int n,i;
+    frac a,tot;
+    frac f[2];
+    compute(2);
 }
-
-int addnum(struct fraction a)
+ 
+frac input()
 {
-   int num,sumn=0;
-   for(int i=0;i<2;i++)
-   {
-      for(int j=0;j<2;j++)
-      {
-          if(j!=i)
-          {
-              a.x[i]=a.x[i]*a.y[j];
-          }
-          num=a.x[i];
-      }
-      sumn=sumn+num;
-   }
-   return sumn;
+    frac f;
+    printf("Enter the numerator:");
+    scanf("%d",&f.n);
+    printf("Enter the denominator:");
+    scanf("%d",&f.d);
+    return f;
 }
-
-int addden(struct fraction a)
+ 
+int gcd(int n, int d)
 {
-   int den=1,sumd=0;
-   for(int i=0;i<2;i++)
-   {
-      den=den*(a.y[i]);
-      sumd=den;
-   }
-   return sumd;
-}
-
-int gcd(int sumn,int sumd)
-{
-    int finalgcd,min,i;
-    if(sumn<=sumd)
+    int i,gcd;
+    for(i=1;i<=n && i<=d;i++)
     {
-        min=sumn;
+        if(n%i==0 && d%i==0)
+        {
+            gcd=i;
+        }
+    }
+    return gcd;
+}
+
+void compute(int n)
+{
+    int i;
+    frac tot,a,f[n];
+    for(i=0;i<n;i++)
+    {
+        printf("Fraction %d\n",i+1);
+        f[i]=input();
+    }
+    if(n==1)
+    {
+        tot=f[0];
     }
     else
     {
-        min=sumd;
-    }
-    for(i=2;i<=min;i++)
-    {
-        if(sumn%i==0 && sumd%i==0)
+        a=f[0];
+        for(i=0;i<n-1;i++)
         {
-            finalgcd=i;
+            tot=sum(a,f[i+1]);
+            a=tot;
         }
     }
-    return finalgcd;
+    output(tot);
 }
-
-void output(int sumn,int sumd,int finalgcd)
+ 
+frac sum(frac fract1, frac fract2)
 {
-   printf("The sum of the fractions is %d/%d",sumn/finalgcd,sumd/finalgcd);
+    frac fract3;
+    int c;
+    fract3.n=((fract1.n*fract2.d)+(fract2.n*fract1.d));
+    fract3.d=fract1.d*fract2.d;
+    c=gcd(fract3.n,fract3.d);
+    fract3.n=fract3.n/c;
+    fract3.d=fract3.d/c;
+    return fract3;
 }
-
-void add2frac()
+ 
+void output(frac total)
 {
-   struct fraction a;
-   int sumn,sumd,finalgcd;
-   input(&a);
-   sumn=addnum(a);
-   sumd=addden(a);
-   finalgcd=gcd(sumn,sumd);
-   output(sumn,sumd,finalgcd);
+    printf("The sum of the fractions is %d / %d",total.n,total.d);
 }
 
 void main()
 {
-    add2frac();
+    addfrac();
 }
