@@ -37,7 +37,7 @@ struct Fract add(struct Fract a, struct Fract b)
 int gcd_calc(int d1,int d2)
 {
    int i,gcd;
-   for(i=1;i<=d1&&i<=d2;i++)
+   for(i=2;i<=d1&&i<=d2;i++)
    {
        if(d1%i==0&&d2%i==0)
        {
