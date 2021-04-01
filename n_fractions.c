@@ -1,12 +1,13 @@
 //WAP to find the sum of n fractions.
 #include<stdio.h>
+
 typedef struct 
 {
     int n;
     int d;
 }frac;
 
- 
+int inputn();
 frac input();
 void compute(int);
 frac sum(frac,frac);
@@ -17,12 +18,19 @@ void addfrac()
 {
     int n,i;
     frac a,tot;
-    printf("Enter the number of fractions:");
-    scanf("%d",&n);
+    n=inputn();
     frac f[n];
     compute(n);
 }
  
+int inputn()
+{
+    int n;
+    printf("Enter the number of fractions:");
+    scanf("%d",&n);
+    return n;
+}
+
 frac input()
 {
     frac f;
